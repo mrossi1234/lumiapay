@@ -541,12 +541,12 @@
     pointer-events: none;
   }
 
-  /* Swipe hint — only on mobile */
+  /* ── SWIPE HINT ── */
   .swipe-hint {
     display: none;
     align-items: center;
     gap: 6px;
-    margin-top: 24px;
+    margin-top: 20px;
     color: rgba(255,255,255,.35);
     font-size: 11px;
     letter-spacing: .08em;
@@ -555,72 +555,103 @@
   .swipe-hint svg { width: 18px; height: 18px; stroke: rgba(255,255,255,.35); animation: swanim 1.8s infinite; }
   @keyframes swanim {
     0%,100% { transform: translateX(0); opacity: .4; }
-    50% { transform: translateX(5px); opacity: 1; }
+    50% { transform: translateX(6px); opacity: 1; }
   }
 
+  /* ══════════════════════════════════
+     MOBILE — swipe horizontal mantido
+     conteúdo preenche 100dvh
+  ══════════════════════════════════ */
   @media (max-width: 768px) {
-    /* Keep swipe/slide navigation — just scale content down */
-    .slide { padding: 56px 22px 80px; }
 
-    #cta-fixed { top: 10px; right: 10px; font-size: 11px; padding: 7px 11px; gap: 5px; }
+    html, body { height: 100%; overflow: hidden; }
+
+    #deck { height: 100dvh; }
+
+    /* Slide ocupa tela inteira, distribui conteúdo verticalmente */
+    .slide {
+      padding: 52px 20px 70px;
+      justify-content: space-between;
+    }
+
+    /* Content estica para preencher */
+    .content {
+      width: 100%;
+      max-width: 100%;
+      display: flex;
+      flex-direction: column;
+      flex: 1;
+      justify-content: space-between;
+    }
+
+    /* ── CTA fixo ── */
+    #cta-fixed { top: 10px; right: 10px; font-size: 11px; padding: 6px 11px; gap: 5px; }
     #cta-fixed svg { width: 11px; height: 11px; }
 
-    .logo { font-size: 20px; margin-bottom: 16px; }
-    .h1 { font-size: clamp(26px, 7.5vw, 40px); margin-bottom: 12px; }
-    .h2 { font-size: clamp(20px, 6.5vw, 32px); margin-bottom: 10px; }
-    .body { font-size: 13px; max-width: 100%; }
-    .slogan { font-size: 14px; margin-bottom: 20px; }
-    .label { margin-bottom: 10px; font-size: 10px; }
-    .badge { font-size: 10px; padding: 5px 10px; margin-bottom: 12px; }
+    /* ── Tipografia escalada por vw ── */
+    .logo { font-size: 5.5vw; margin-bottom: 2vh; letter-spacing: .06em; }
+    .label { font-size: 2.5vw; margin-bottom: 1.5vh; }
+    .badge { font-size: 2.8vw; padding: 1vw 3vw; margin-bottom: 2vh; }
 
-    /* Cards: 2 cols */
-    .card-grid.cols-3 { grid-template-columns: 1fr 1fr; gap: 8px; margin-top: 14px; }
-    .card-grid.cols-2 { grid-template-columns: 1fr 1fr; gap: 8px; }
-    .card { padding: 12px; border-radius: 10px; }
-    .card-icon { width: 30px; height: 30px; border-radius: 8px; margin-bottom: 8px; }
-    .card-icon svg { width: 15px; height: 15px; }
-    .card-title { font-size: 11px; margin-bottom: 4px; }
-    .card-body { font-size: 10px; line-height: 1.5; }
+    .h1 { font-size: 7.5vw; line-height: 1.1; margin-bottom: 2vh; }
+    .h2 { font-size: 6.5vw; line-height: 1.12; margin-bottom: 1.5vh; }
+    .body { font-size: 3.6vw; max-width: 100%; line-height: 1.6; }
+    .slogan { font-size: 3.8vw; margin-bottom: 2vh; line-height: 1.5; }
 
-    /* Steps: 2x2 */
-    .steps { flex-wrap: wrap; gap: 14px 10px; margin-top: 18px; }
-    .step { max-width: calc(50% - 5px); flex: 0 0 calc(50% - 5px); }
+    /* ── Cards: 2 colunas, crescem para preencher ── */
+    .card-grid { margin-top: 2vh; gap: 2vw; }
+    .card-grid.cols-3 { grid-template-columns: 1fr 1fr; }
+    .card-grid.cols-2 { grid-template-columns: 1fr 1fr; }
+    .card { padding: 3vw; border-radius: 3vw; }
+    .card-icon { width: 8vw; height: 8vw; border-radius: 2vw; margin-bottom: 2vw; }
+    .card-icon svg { width: 4.5vw; height: 4.5vw; }
+    .card-title { font-size: 3vw; margin-bottom: 1vw; }
+    .card-body { font-size: 2.6vw; line-height: 1.5; }
+
+    /* ── Steps: grade 2x2 ── */
+    .steps { flex-wrap: wrap; gap: 3vw 2vw; margin-top: 2vh; }
+    .step { max-width: calc(50% - 1vw); flex: 0 0 calc(50% - 1vw); }
     .step:not(:last-child)::after { display: none; }
-    .step-num { width: 36px; height: 36px; font-size: 14px; margin-bottom: 8px; }
-    .step-label { font-size: 11px; }
-    .step-sub { font-size: 10px; margin-top: 3px; }
+    .step-num { width: 10vw; height: 10vw; font-size: 4.5vw; margin-bottom: 2vw; }
+    .step-label { font-size: 3vw; line-height: 1.3; }
+    .step-sub { font-size: 2.6vw; margin-top: 1vw; }
 
-    /* Preview card */
-    .preview-card { max-width: 100%; margin-top: 14px; padding: 16px; border-radius: 14px; }
-    .preview-row { font-size: 12px; padding: 8px 0; }
-    .preview-value.green { font-size: 15px; }
+    /* ── Preview card ── */
+    .preview-card { max-width: 100%; margin-top: 2vh; padding: 4vw; border-radius: 4vw; }
+    .preview-row { font-size: 3.4vw; padding: 2vw 0; }
+    .preview-value.green { font-size: 4.5vw; }
 
-    /* Security list */
-    .sec-list { max-width: 100%; margin-top: 14px; gap: 10px; }
-    .sec-check { width: 24px; height: 24px; flex-shrink: 0; }
-    .sec-check svg { width: 11px; height: 11px; }
-    .sec-text { font-size: 12px; }
+    /* ── Security list ── */
+    .sec-list { max-width: 100%; margin-top: 2vh; gap: 2vh; }
+    .sec-check { width: 7vw; height: 7vw; flex-shrink: 0; }
+    .sec-check svg { width: 3.5vw; height: 3.5vw; }
+    .sec-text { font-size: 3.2vw; }
 
-    /* Button */
-    .btn-primary { font-size: 14px; padding: 13px 22px; margin-top: 20px; border-radius: 11px; }
+    /* ── Botão ── */
+    .btn-primary { font-size: 3.8vw; padding: 3.5vw 6vw; margin-top: 2vh; border-radius: 3vw; gap: 2vw; }
+    .btn-primary svg { width: 4vw; height: 4vw; }
 
-    /* Nav: smaller on mobile */
-    #nav { bottom: 14px; padding: 6px 12px; gap: 8px; }
-    .nav-btn { width: 30px; height: 30px; font-size: 14px; }
+    /* ── Nav ── */
+    #nav { bottom: 12px; padding: 6px 12px; gap: 8px; }
+    .nav-btn { width: 28px; height: 28px; font-size: 13px; }
     .dot { width: 5px; height: 5px; }
     .dot.on { width: 14px; }
-    .slide-count { font-size: 10px; min-width: 30px; }
+    .slide-count { font-size: 10px; min-width: 28px; }
 
-    /* Swipe hint visible */
-    .swipe-hint { display: flex !important; }
-  }
+    /* ── Swipe hint visível só na capa ── */
+    .swipe-hint { display: flex; }
 
-  @media (max-width: 430px) {
-    .slide { padding: 52px 16px 76px; }
-    .h1 { font-size: 24px; }
-    .h2 { font-size: 19px; }
-    .card-grid.cols-3 { grid-template-columns: 1fr 1fr; }
-    .body { font-size: 12px; }
+    /* ── Blocos de impacto (slide solução) ── */
+    .impact-block-row {
+      flex-direction: column;
+      gap: 2vw;
+      margin-top: 2vh;
+    }
+    .impact-block-row > div {
+      min-width: 0 !important;
+      max-width: 100% !important;
+      flex: 1;
+    }
   }
 </style>
 </head>
@@ -692,7 +723,7 @@
       <div class="label">A solução</div>
       <h2 class="h2">E se você pudesse<br>receber <span class="accent">hoje?</span></h2>
       <p class="body">A LUMIA é uma plataforma que permite antecipar o pagamento de trabalhos que você já fez e entregou. Sem esperar. Sem burocracia. Tudo pelo celular.</p>
-      <div style="margin-top:36px; display:flex; justify-content:center; gap:16px; flex-wrap:wrap">
+      <div style="margin-top:36px; display:flex; justify-content:center; gap:16px; flex-wrap:wrap" class="impact-block-row">
         <div style="background:rgba(59,130,246,.12); border:1px solid rgba(96,165,250,.25); border-radius:14px; padding:20px 24px; min-width:140px; flex:1; max-width:200px">
           <div style="font-size:32px; font-weight:800; color:#60A5FA">D+1</div>
           <div style="font-size:13px; color:rgba(255,255,255,.6); margin-top:4px">Você recebe em 1 dia útil</div>
