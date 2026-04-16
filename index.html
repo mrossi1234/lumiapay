@@ -541,116 +541,86 @@
     pointer-events: none;
   }
 
-  @media (max-width: 768px) {
-    /* Switch to vertical scroll on mobile */
-    html, body { overflow: auto; height: auto; }
-
-    #deck {
-      height: auto;
-      overflow: visible;
-    }
-
-    .slide {
-      position: relative;
-      inset: auto;
-      opacity: 1 !important;
-      transform: none !important;
-      pointer-events: all;
-      padding: 60px 24px 48px;
-      min-height: 100svh;
-      transition: none;
-    }
-
-    .slide.exit { opacity: 1 !important; transform: none !important; }
-
-    #cta-fixed {
-      top: 12px;
-      right: 12px;
-      font-size: 11px;
-      padding: 7px 12px;
-      gap: 5px;
-    }
-    #cta-fixed svg { width: 11px; height: 11px; }
-
-    .logo { font-size: 22px; margin-bottom: 20px; }
-
-    .h1 { font-size: clamp(30px, 8vw, 48px); margin-bottom: 14px; }
-    .h2 { font-size: clamp(24px, 7vw, 38px); margin-bottom: 12px; }
-    .body { font-size: 15px; max-width: 100%; }
-    .slogan { font-size: 16px; margin-bottom: 28px; }
-    .label { margin-bottom: 12px; }
-
-    .badge { font-size: 11px; padding: 5px 12px; margin-bottom: 16px; }
-
-    /* Cards: 2 cols on tablet, 1 col on phone */
-    .card-grid.cols-3 { grid-template-columns: 1fr 1fr; gap: 10px; margin-top: 20px; }
-    .card-grid.cols-2 { grid-template-columns: 1fr; }
-    .card { padding: 16px; border-radius: 12px; }
-    .card-icon { width: 36px; height: 36px; border-radius: 9px; margin-bottom: 10px; }
-    .card-icon svg { width: 18px; height: 18px; }
-    .card-title { font-size: 13px; }
-    .card-body { font-size: 12px; }
-
-    /* Steps: 2x2 grid */
-    .steps { flex-wrap: wrap; gap: 20px 12px; margin-top: 24px; }
-    .step { max-width: calc(50% - 6px); flex: 0 0 calc(50% - 6px); }
-    .step:not(:last-child)::after { display: none; }
-    .step-num { width: 44px; height: 44px; font-size: 17px; margin-bottom: 10px; }
-    .step-label { font-size: 12px; }
-    .step-sub { font-size: 11px; }
-
-    /* Preview card */
-    .preview-card { max-width: 100%; margin-top: 20px; padding: 20px; }
-    .preview-row { font-size: 13px; padding: 10px 0; }
-    .preview-value.green { font-size: 16px; }
-
-    /* Security list */
-    .sec-list { max-width: 100%; margin-top: 20px; gap: 12px; }
-    .sec-check { width: 28px; height: 28px; flex-shrink: 0; }
-    .sec-check svg { width: 13px; height: 13px; }
-    .sec-text { font-size: 13px; }
-
-    /* Impact blocks */
-    .btn-primary { font-size: 15px; padding: 14px 24px; margin-top: 24px; }
-
-    /* Nav: hidden on mobile (scroll replaces it) */
-    #nav { display: none; }
-
-    /* Mobile scroll indicator */
-    .mobile-scroll-hint {
-      display: flex !important;
-    }
-  }
-
-  @media (max-width: 480px) {
-    .card-grid.cols-3 { grid-template-columns: 1fr; }
-    .slide { padding: 56px 20px 44px; }
-    .h1 { font-size: 28px; }
-    .h2 { font-size: 24px; }
-  }
-
-  /* Scroll hint — only on mobile */
-  .mobile-scroll-hint {
+  /* Swipe hint — only on mobile */
+  .swipe-hint {
     display: none;
-    flex-direction: column;
     align-items: center;
     gap: 6px;
-    margin-top: 28px;
+    margin-top: 24px;
     color: rgba(255,255,255,.35);
     font-size: 11px;
     letter-spacing: .08em;
     text-transform: uppercase;
   }
-  .scroll-arrow {
-    width: 20px; height: 20px;
-    border-right: 2px solid rgba(255,255,255,.3);
-    border-bottom: 2px solid rgba(255,255,255,.3);
-    transform: rotate(45deg);
-    animation: scrollbounce 1.6s infinite;
+  .swipe-hint svg { width: 18px; height: 18px; stroke: rgba(255,255,255,.35); animation: swanim 1.8s infinite; }
+  @keyframes swanim {
+    0%,100% { transform: translateX(0); opacity: .4; }
+    50% { transform: translateX(5px); opacity: 1; }
   }
-  @keyframes scrollbounce {
-    0%,100% { transform: rotate(45deg) translateY(0); opacity: .4; }
-    50% { transform: rotate(45deg) translateY(5px); opacity: 1; }
+
+  @media (max-width: 768px) {
+    /* Keep swipe/slide navigation — just scale content down */
+    .slide { padding: 56px 22px 80px; }
+
+    #cta-fixed { top: 10px; right: 10px; font-size: 11px; padding: 7px 11px; gap: 5px; }
+    #cta-fixed svg { width: 11px; height: 11px; }
+
+    .logo { font-size: 20px; margin-bottom: 16px; }
+    .h1 { font-size: clamp(26px, 7.5vw, 40px); margin-bottom: 12px; }
+    .h2 { font-size: clamp(20px, 6.5vw, 32px); margin-bottom: 10px; }
+    .body { font-size: 13px; max-width: 100%; }
+    .slogan { font-size: 14px; margin-bottom: 20px; }
+    .label { margin-bottom: 10px; font-size: 10px; }
+    .badge { font-size: 10px; padding: 5px 10px; margin-bottom: 12px; }
+
+    /* Cards: 2 cols */
+    .card-grid.cols-3 { grid-template-columns: 1fr 1fr; gap: 8px; margin-top: 14px; }
+    .card-grid.cols-2 { grid-template-columns: 1fr 1fr; gap: 8px; }
+    .card { padding: 12px; border-radius: 10px; }
+    .card-icon { width: 30px; height: 30px; border-radius: 8px; margin-bottom: 8px; }
+    .card-icon svg { width: 15px; height: 15px; }
+    .card-title { font-size: 11px; margin-bottom: 4px; }
+    .card-body { font-size: 10px; line-height: 1.5; }
+
+    /* Steps: 2x2 */
+    .steps { flex-wrap: wrap; gap: 14px 10px; margin-top: 18px; }
+    .step { max-width: calc(50% - 5px); flex: 0 0 calc(50% - 5px); }
+    .step:not(:last-child)::after { display: none; }
+    .step-num { width: 36px; height: 36px; font-size: 14px; margin-bottom: 8px; }
+    .step-label { font-size: 11px; }
+    .step-sub { font-size: 10px; margin-top: 3px; }
+
+    /* Preview card */
+    .preview-card { max-width: 100%; margin-top: 14px; padding: 16px; border-radius: 14px; }
+    .preview-row { font-size: 12px; padding: 8px 0; }
+    .preview-value.green { font-size: 15px; }
+
+    /* Security list */
+    .sec-list { max-width: 100%; margin-top: 14px; gap: 10px; }
+    .sec-check { width: 24px; height: 24px; flex-shrink: 0; }
+    .sec-check svg { width: 11px; height: 11px; }
+    .sec-text { font-size: 12px; }
+
+    /* Button */
+    .btn-primary { font-size: 14px; padding: 13px 22px; margin-top: 20px; border-radius: 11px; }
+
+    /* Nav: smaller on mobile */
+    #nav { bottom: 14px; padding: 6px 12px; gap: 8px; }
+    .nav-btn { width: 30px; height: 30px; font-size: 14px; }
+    .dot { width: 5px; height: 5px; }
+    .dot.on { width: 14px; }
+    .slide-count { font-size: 10px; min-width: 30px; }
+
+    /* Swipe hint visible */
+    .swipe-hint { display: flex !important; }
+  }
+
+  @media (max-width: 430px) {
+    .slide { padding: 52px 16px 76px; }
+    .h1 { font-size: 24px; }
+    .h2 { font-size: 19px; }
+    .card-grid.cols-3 { grid-template-columns: 1fr 1fr; }
+    .body { font-size: 12px; }
   }
 </style>
 </head>
@@ -675,7 +645,10 @@
         Você criou.<br>Entregou.<br><span class="accent">Agora receba.</span>
       </h1>
       <p class="slogan">Antecipe seus pagamentos em <em>1 dia útil.</em><br>Simples, digital, sem enrolação.</p>
-      <div class="mobile-scroll-hint"><div class="scroll-arrow"></div><span>deslize para ver</span></div>
+      <div class="swipe-hint">
+        <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+        <span>deslize para ver</span>
+      </div>
     </div>
   </div>
 
